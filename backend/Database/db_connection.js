@@ -1,4 +1,23 @@
+import mongoose from 'mongoose';
+require('dotenv').config();
 
+const URL = process.env.MONGODB_API_KEY;
+if (!URL) {
+    throw new Error("Please define the MONGODB_API_KEY");
+}
+
+const connectToDatabase = async () => {
+    try {
+        await mongoose.connect(URL);
+        console.log("Connected to MongoDB");
+    }
+    catch (error) {
+        console.error("Error connecting to database: ", error);
+        process.emit(1);
+    }
+}
+
+export default connectToDatabase;
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 // const uri = "mongodb+srv://jeremynicholas897:Cookiem@ster2005@jeremy.w4kohol.mongodb.net/?retryWrites=true&w=majority&appName=Jeremy";
