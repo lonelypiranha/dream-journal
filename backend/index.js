@@ -1,14 +1,15 @@
-const express = require("express");
-const cors = require("cors");
-const OpenAI = require("openai");
-require("dotenv").config();
-import connectToDatabase from "./Database/db_connection";
+import express from "express";
+import cors from "cors";
+import OpenAI from "openai";
+import dotenv from 'dotenv';
+dotenv.config()
+import connectToDatabase from "./database/db_connection.js";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-console.log(process.env.MONGO);
+console.log(process.env.MONGODB_API_KEY);
 console.log(process.env.OPENAI_API_KEY);
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config()
 
 const URL = process.env.MONGODB_API_KEY;
 if (!URL) {
