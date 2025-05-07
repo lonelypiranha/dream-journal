@@ -52,5 +52,5 @@ app.post("/api/ai", async (req, res) => {
 
 app.listen(3001, async () => {
   console.log("Server running on port 3001");
-  connectToDatabase;
+  await connectToDatabase();
 });
