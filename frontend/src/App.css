@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    background-color: #2D3173;
+}
+.App {
+  text-align: center;
+}
+
+
+.App-header {
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-family: Inknut Antiqua;
+  color: #FFF39A;
+  margin-top: 30px;
+}
+
+#logo {
+    height: 100%;
+    margin-right: 20px;
+}
+
+hr {
+    margin-top: 30px;
+    border-color: #FFF39A;
+    width: 80%;
+    opacity: 50%;
+}
+
+nav {
+    display: flex;
+    width: 80%;
+    justify-self: center;
+    justify-content: space-around;
+}
+
+.navButton {
+    background-color: #FFF39A;
+    border: none;
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 40px;
+    width: 180px;
+    border-radius: 100px;
+    font-family: "Montserrat";
+    font-weight: 700;
+    color: #2D3173;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navButton:hover {
+    background-color:#4c3764;
+    color: #FFF39A;
+    transition: 100ms ease-in;
+    scale: 1.2;
+    box-shadow: 2px 2px 3px  #000000;
+}
+
+.navIconCommunity {
+    height: 100%;
+    margin-right: 10px;
+}
+
+.navIcons {
+    height: 75%;
+    margin-right: 10px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+#noDreams {
+    line-height: 200px;
+    margin-top: -100px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+    color: #FFF39A;
+}
+
