@@ -5,7 +5,7 @@ const dreamSchema = new mongoose.Schema({
         required: [true, 'Title required'],
         trim: false,
     },
-    dreamContent: {
+    content: {
         type: String,
         required: [true, 'Dream content required'],
         trim: false,

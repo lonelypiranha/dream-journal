@@ -57,6 +57,24 @@ function AddDream(props) {
     //   } else {
     //     setSubmitStatus("Retry");
     //   }
+
+
+
+    const result = await fetch("/api/v1/dbOperations/dbAddDream", {
+        method: "POST",
+        headers: { 
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({dreamContent: prompt, dreamTitle: title, dreamGenre: title, dreamAnalysis: prompt, dreamImage: test})
+      });
+
+      if (result.ok) {
+        const airespond = await result.json(); // Parse the JSON response body
+        setSubmitStatus("Submit");
+      } else {
+        setSubmitStatus("Retry");
+      }
+    
     setDream((prevDream) => ({
       ...prevDream,
       dreamContent: prompt,

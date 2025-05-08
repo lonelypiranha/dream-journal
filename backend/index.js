@@ -3,14 +3,20 @@ import cors from "cors";
 import OpenAI from "openai";
 import dotenv from 'dotenv';
 dotenv.config()
-import connectToDatabase from "./database/db_connection.js";
+import connectToDatabase from "./Database/db_connection.js";
+import dreamRouter from "./Routes/db_management.js";
+import errorMiddleware from "./error_handler/error.middleware.js";
+import cookieParser from 'cookie-parser';
+import mongoose from "mongoose";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
 
-console.log(process.env.MONGODB_API_KEY);
-console.log(process.env.OPENAI_API_KEY);
+app.use('/api/v1/dbOperations', dreamRouter);
+app.use(errorMiddleware);
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -55,3 +61,9 @@ app.listen(3001, async () => {
   console.log("Server running on port 3001");
   await connectToDatabase();
 });
+
+process.on('SIGINT', async () => {
+    await mongoose.disconnect();
+    console.log('Mongoose connection closed on app termination');
+    process.exit(0);
+  });

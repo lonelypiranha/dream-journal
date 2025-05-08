@@ -9,7 +9,9 @@ if (!URL) {
 
 const connectToDatabase = async () => {
     try {
-        await mongoose.connect(URL);
+        await mongoose.connect(URL, {
+            dbName: 'dream_journal',
+        });
         console.log("Connected to MongoDB");
     }
     catch (error) {
