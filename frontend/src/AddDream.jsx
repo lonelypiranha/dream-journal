@@ -20,17 +20,18 @@ function AddDream(props) {
   useEffect(() => {
     setSaved(0);
     setSaveButton("Save Dream");
-  }, [dream.dreamAnalysis, dream.dreamContent, dream.dreamTitle])
+  }, [dream.dreamAnalysis, dream.dreamContent, dream.dreamTitle]);
 
   useEffect(() => {
     if (dream.dreamAnalysis !== "" && AIResponse.current !== null) {
-        const yCoord = AIResponse.current.getBoundingClientRect().top + window.scrollY
-        window.scroll({
-            top: yCoord,
-            behavior: "smooth"
-        })
+      const yCoord =
+        AIResponse.current.getBoundingClientRect().top + window.scrollY;
+      window.scroll({
+        top: yCoord,
+        behavior: "smooth",
+      });
     }
-}, [dream.dreamAnalysis])
+  }, [dream.dreamAnalysis]);
 
   const responseGenerate = async (prompt, title) => {
     // const result = await fetch("/api/ai", {
@@ -58,23 +59,6 @@ function AddDream(props) {
     //     setSubmitStatus("Retry");
     //   }
 
-
-
-    const result = await fetch("/api/v1/dbOperations/dbAddDream", {
-        method: "POST",
-        headers: { 
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({dreamContent: prompt, dreamTitle: title, dreamGenre: title, dreamAnalysis: prompt, dreamImage: test})
-      });
-
-      if (result.ok) {
-        const airespond = await result.json(); // Parse the JSON response body
-        setSubmitStatus("Submit");
-      } else {
-        setSubmitStatus("Retry");
-      }
-    
     setDream((prevDream) => ({
       ...prevDream,
       dreamContent: prompt,
@@ -92,17 +76,27 @@ function AddDream(props) {
     responseGenerate(formData.get("dreamDesc"), formData.get("dreamTitle"));
   }
 
-  function saveDream() {
+  async function saveDream() {
     if (!saved) {
-        setSaved(1);
-        setSaveButton("Dream Saved!");
-        props.setDreams((prevDreams) => [
-            dream,
-            ...prevDreams,
-          ]);
-    }
-    else {
-        alert("Dream already saved!");
+      setSaveButton("Saving...");
+      const result = await fetch("/api/v1/dbOperations/dbAddDream", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          dreamContent: dream.dreamContent,
+          dreamTitle: dream.dreamTitle,
+          dreamGenre: dream.dreamGenre,
+          dreamAnalysis: dream.dreamAnalysis,
+          dreamImage: dream.dreamImage,
+        }),
+      });
+      setSaved(1);
+      setSaveButton("Dream Saved!");
+      props.setDreams((prevDreams) => [dream, ...prevDreams]);
+    } else {
+      alert("Dream already saved!");
     }
   }
 
