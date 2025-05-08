@@ -34,39 +34,29 @@ function AddDream(props) {
   }, [dream.dreamAnalysis]);
 
   const responseGenerate = async (prompt, title) => {
-    // const result = await fetch("/api/ai", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({input: prompt})
-    //   })
+    const result = await fetch("/api/v1/aiResponse/aiAnalysis", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ input: prompt }),
+    });
 
-    //   if (result.ok) {
-    //     const airespond = await result.json(); // Parse the JSON response body
-    //     console.log(airespond);
-    // setDream((prevDream) => ({
-    //              ...prevDream,
-    //              dreamContent: prompt,
-    //              dreamAnalysis: airespond.result1,
-    //              dreamGenre: airespond.result2,
-    //              dreamTitle: title,
-    //         }))
-    //     setSubmitStatus("Submit");
-    //     props.setDreams(prevDreams => [{dreamContent: prompt,
-    //         dreamAnalysis: airespond.result1, dreamGenre: airespond.result2}, ...prevDreams])
-    //   } else {
-    //     setSubmitStatus("Retry");
-    //   }
-
-    setDream((prevDream) => ({
-      ...prevDream,
-      dreamContent: prompt,
-      dreamAnalysis: prompt,
-      dreamGenre: "Science",
-      dreamTitle: title,
-      dreamImage: test,
-    }));
+    if (result.ok) {
+      const airespond = await result.json(); // Parse the JSON response body
+      console.log(airespond);
+      setDream((prevDream) => ({
+        ...prevDream,
+        dreamContent: prompt,
+        dreamAnalysis: airespond.result1,
+        dreamGenre: airespond.result2,
+        dreamTitle: title,
+        dreamImage: test,
+      }));
+      setSubmitStatus("Submit");
+    } else {
+      setSubmitStatus("Retry");
+    }
   };
 
   async function handleSubmit(e) {

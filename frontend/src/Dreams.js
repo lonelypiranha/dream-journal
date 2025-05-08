@@ -35,6 +35,7 @@ function Dreams(props) {
     <div className='contents'>
     <HeaderAndNavBar />
     {dreamEntries}
+    {props.dreams.length == 0 && <h2 id="noDreams">There are no dreams posted yet.</h2>}
     </div>
   );
 }

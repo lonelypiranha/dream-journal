@@ -4,7 +4,7 @@ import OpenAI from "openai";
 const aiRouter = Router();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-dreamRouter.post("/aiAnalysis", async (req, res, next) => {
+aiRouter.post("/aiAnalysis", async (req, res, next) => {
     try {
         const { input } = req.body;
         const response = await openai.responses.create({
