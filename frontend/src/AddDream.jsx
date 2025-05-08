@@ -51,7 +51,7 @@ function AddDream(props) {
         dreamAnalysis: airespond.result1,
         dreamGenre: airespond.result2,
         dreamTitle: title,
-        dreamImage: test,
+        dreamImage: airespond.image,
       }));
       setSubmitStatus("Submit");
     } else {
@@ -123,7 +123,7 @@ function AddDream(props) {
           <div id="AI" ref={AIResponse}>
             {dream.dreamAnalysis}
             <p>Genre: {dream.dreamGenre}</p>
-            {dream.dreamImage && <img id="aiImg" src={dream.dreamImage} />}
+            {dream.dreamImage && <img id="aiImg" src={`data:image/png;base64,${dream.dreamImage}`} />}
           </div>
           <button class="analyzeButton" onClick={saveDream}>
             <img class="analyzeIcon" src={save} alt="save dream" />
