@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 body {
     background-color: #2D3173;
+    overflow-x: hidden;
 }
 .App {
   text-align: center;

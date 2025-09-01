@@ -44,6 +44,7 @@ aiRouter.post("/aiAnalysis", async (req, res, next) => {
       },
     });
 
+    //unused
     // const [aiAnalysis, imageGen] = await Promise.all([
     //   openai.responses.create({
     //     model: "gpt-4o-mini-2024-07-18",
@@ -89,6 +90,7 @@ aiRouter.post("/aiAnalysis", async (req, res, next) => {
       result2: parsed.genre,
       image: base64Image,
     });
+    
   } catch (error) {
     res.status(500).send(error.message);
   }

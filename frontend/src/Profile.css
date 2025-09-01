@@ -1,0 +1,42 @@
+.ProfileInfo {
+    min-width: 50%;
+    min-height: 200px;
+    background-color: #fff8c5;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    margin-top: 4%;
+    font-size: 25px;
+    border-radius: 15px;
+    color: #2D3173;
+    justify-self: center;
+}
+
+.SignOut {
+    background-color: #FFF39A;
+    border: none;
+    margin-top: 40px;
+    margin-right: 20px;
+    height: 40px;
+    width: 180px;
+    border-radius: 100px;
+    font-family: "Montserrat";
+    font-weight: 700;
+    color: #2D3173;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+}
+
+.SignOut:hover {
+    background-color:#4c3764;
+    color: #FFF39A;
+    transition: 100ms ease-in;
+    scale: 1.2;
+    box-shadow: 2px 2px 3px  #000000;
+}
+
+.link {
+    text-decoration: none;
+}

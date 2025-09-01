@@ -52,12 +52,13 @@ function AddDream(props) {
         dreamGenre: airespond.result2,
         dreamTitle: title,
         dreamImage: airespond.image,
+        dreamUser: props.user
       }));
       setSubmitStatus("Submit");
     } else {
       setSubmitStatus("Retry");
     }
-  };
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -80,6 +81,7 @@ function AddDream(props) {
           dreamGenre: dream.dreamGenre,
           dreamAnalysis: dream.dreamAnalysis,
           dreamImage: dream.dreamImage,
+          dreamUser: dream.dreamUser
         }),
       });
       setSaved(1);

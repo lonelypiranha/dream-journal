@@ -16,7 +16,7 @@ export default function headerAndNavBar() {
     </header>
     <hr></hr>
     <nav>
-        <Link to="/" className='link'>
+        <Link to="/Community" className='link'>
         <button class="navButton"> 
             <img class="navIconCommunity" src={group} alt="community" />
             Community

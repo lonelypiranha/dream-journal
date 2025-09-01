@@ -24,8 +24,12 @@ const dreamSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Image required'],
         trim: false,
-    }
-})
+    },
+    user: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User", 
+        required: true }
+}, { timestamps: true })
 
 const Dream = mongoose.model('Dream', dreamSchema);
 export default Dream;
