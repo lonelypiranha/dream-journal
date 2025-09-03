@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Dream from "../Models/dream.model.js";
+import User from "../Models/user.model.js";
 import { Router } from "express";
 import authorize from "../error_handler/auth.middleware.js";
 
@@ -11,6 +12,7 @@ dreamRouter.post("/dbAddDream", authorize, async (req, res, next) => {
   try {
     const { dreamTitle, dreamContent, dreamGenre, dreamAnalysis, dreamImage } =
       req.body;
+    const user = await User.findById(req.userId);
     const dreams = await Dream.create(
       [
         {
@@ -20,6 +22,7 @@ dreamRouter.post("/dbAddDream", authorize, async (req, res, next) => {
           analysis: dreamAnalysis,
           image: dreamImage,
           user: req.userId,
+          username: user.name,
           posted: false,
         },
       ],
@@ -42,7 +45,6 @@ dreamRouter.post("/dbAddDream", authorize, async (req, res, next) => {
 dreamRouter.get("/dbFetchDream", authorize, async (req, res, next) => {
   try {
     const allDreams = await Dream.find({ user: req.userId });
-
     res.status(201).json({
       success: true,
       dreamList: allDreams,
@@ -52,45 +54,49 @@ dreamRouter.get("/dbFetchDream", authorize, async (req, res, next) => {
   }
 });
 
-dreamRouter.post(
-  "/dbChangePostStatus",
-  authorize,
-  async (req, res, next) => {
+dreamRouter.get("/dbFetchPost", authorize, async (req, res, next) => {
     try {
-      const { dreamID, postedOrNot } = req.body;
-
-      const dream = await Dream.findOneAndUpdate(
-        { _id: dreamID },
-        { $set: { posted: !postedOrNot } },
-        { new: true }
-      );
-
+      const allDreams = await Dream.find({ posted: true });
       res.status(201).json({
         success: true,
-        dreamObj: dream,
+        dreamList: allDreams,
       });
     } catch (error) {
       next(error);
     }
-  }
-);
+  });
 
-dreamRouter.post(
-    "/dbDeleteDream",
-    authorize,
-    async (req, res, next) => {
-      try {
-        const { dreamID } = req.body;
-  
-        await Dream.deleteOne({ _id: dreamID });
-  
-        res.status(201).json({
-          success: true,
-        });
-      } catch (error) {
-        next(error);
-      }
-    }
-  );
+dreamRouter.post("/dbChangePostStatus", authorize, async (req, res, next) => {
+  try {
+    const { dreamID, postedOrNot } = req.body;
+
+    const dream = await Dream.findOneAndUpdate(
+      { _id: dreamID },
+      { $set: { posted: !postedOrNot } },
+      { new: true }
+    );
+
+    res.status(201).json({
+      success: true,
+      dreamObj: dream,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+dreamRouter.post("/dbDeleteDream", authorize, async (req, res, next) => {
+  try {
+    const { dreamID } = req.body;
+
+    await Dream.deleteOne({ _id: dreamID });
+
+    res.status(201).json({
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default dreamRouter;

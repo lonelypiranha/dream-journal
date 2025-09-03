@@ -31,6 +31,11 @@ const dreamSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    username: {
+      type: String,
+      trim: false,
+      required: true,
+    },
     posted: {
       type: Boolean,
       required: [true, "Post state required"],

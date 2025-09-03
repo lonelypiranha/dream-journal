@@ -7,6 +7,7 @@ import AddDream from "./AddDream";
 import Statistics from "./Statistics";
 import Profile from "./Profile";
 import FullAnalysis from "./FullAnalysis";
+import FullPost from "./FullPost";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -67,7 +68,7 @@ function App() {
           path="/SignUp"
           element={<SignUp setUser={setUser} setDreams={setDreams} />}
         ></Route>
-        <Route path="/Community" element={<Community />}></Route>
+        <Route path="/Community" element={<Community colors={colors}/>}></Route>
         <Route
           path="/Dreams"
           element={<Dreams colors={colors} dreams={dreams} setDreams={setDreams}/>}
@@ -79,6 +80,7 @@ function App() {
         <Route path="/Statistics" element={<Statistics />}></Route>
         <Route path="Profile" element={<Profile user={user} setUser={setUser} setDreams={setDreams}/>}></Route>
         <Route path="/FullAnalysis" element={<FullAnalysis />}></Route>
+        <Route path="/FullPost" element={<FullPost />}></Route>
       </Routes>
     </div>
   );
