@@ -36,6 +36,7 @@
     justify-self: center;
     white-space: pre-wrap;
     justify-items: center;
+    position: relative;
 }
 
 #aiImg2 {
@@ -51,6 +52,13 @@
 
 .descB {
     margin-top: 0;
+}
+
+.descC {
+    position: absolute;
+    top: 20px;
+    left: 1020px;
+    color: #2d3173;
 }
 
 .DA {

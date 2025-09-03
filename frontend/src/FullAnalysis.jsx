@@ -5,12 +5,17 @@ import "./FullAnalysis.css";
 function FullAnalysis() {
   const location = useLocation();
 
+  const createDate = location.state.createdAt;
+  const newDate = new Date(createDate);
+  const formattedDate = newDate.toDateString();
+
   return (
     <>
       <HeaderAndNavBar />
       <h1 className="DA">Dream Analysis</h1>
       <div id="AI2">
         <p id='title2'>{location.state.title}</p>
+        <p className='descC'>{formattedDate}</p>
         <p class='descB'>Genre: {location.state.genre}</p>
         <img id="aiImg2" src={`data:image/png;base64,${location.state.image}`} />
         <p class='descA'>{location.state.content}</p>

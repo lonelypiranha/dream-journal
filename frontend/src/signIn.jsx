@@ -64,14 +64,7 @@ function SignIn(props) {
           props.setDreams([]);
           for (let i = 0; i < dreams.dreamList.length; i++) {
             props.setDreams((prevDreams) => [
-              {
-                dreamContent: dreams.dreamList[i].content,
-                dreamAnalysis: dreams.dreamList[i].analysis,
-                dreamGenre: dreams.dreamList[i].genre,
-                dreamTitle: dreams.dreamList[i].title,
-                dreamImage: dreams.dreamList[i].image,
-                dreamUser: dreams.dreamList[i].user,
-              },
+              dreams.dreamList[i],
               ...prevDreams,
             ]);
           }

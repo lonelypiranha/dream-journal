@@ -52,13 +52,12 @@ function AddDream(props) {
         dreamGenre: airespond.result2,
         dreamTitle: title,
         dreamImage: airespond.image,
-        dreamUser: props.user
       }));
       setSubmitStatus("Submit");
     } else {
       setSubmitStatus("Retry");
     }
-  }
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -70,10 +69,16 @@ function AddDream(props) {
   async function saveDream() {
     if (!saved) {
       setSaveButton("Saving...");
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setSaveButton("Unable to save");
+        return;
+      }
       const result = await fetch("/api/v1/dbOperations/dbAddDream", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           dreamContent: dream.dreamContent,
@@ -81,12 +86,17 @@ function AddDream(props) {
           dreamGenre: dream.dreamGenre,
           dreamAnalysis: dream.dreamAnalysis,
           dreamImage: dream.dreamImage,
-          dreamUser: dream.dreamUser
         }),
       });
-      setSaved(1);
-      setSaveButton("Dream Saved!");
-      props.setDreams((prevDreams) => [dream, ...prevDreams]);
+
+      if (result.ok) {
+        const dreamJSON = await result.json();
+        setSaved(1);
+        setSaveButton("Dream Saved!");
+        props.setDreams((prevDreams) => [dreamJSON.data[0], ...prevDreams]);
+      } else {
+        setSaveButton("Unable to save");
+      }
     } else {
       alert("Dream already saved!");
     }
@@ -125,7 +135,12 @@ function AddDream(props) {
           <div id="AI" ref={AIResponse}>
             {dream.dreamAnalysis}
             <p>Genre: {dream.dreamGenre}</p>
-            {dream.dreamImage && <img id="aiImg" src={`data:image/png;base64,${dream.dreamImage}`} />}
+            {dream.dreamImage && (
+              <img
+                id="aiImg"
+                src={`data:image/png;base64,${dream.dreamImage}`}
+              />
+            )}
           </div>
           <button class="analyzeButton" onClick={saveDream}>
             <img class="analyzeIcon" src={save} alt="save dream" />

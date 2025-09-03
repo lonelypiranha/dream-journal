@@ -20,7 +20,7 @@ function App() {
     Fantasy: "#192849",
     "Science Fiction": "#2868c6",
     Comedy: "#b5d17d",
-    Realistic: "#eddbad",
+    Realistic: "#e2c372",
     Abstract: "#6eb687",
   };
 
@@ -45,14 +45,7 @@ function App() {
       const dreams = await result.json();
       for (let i = 0; i < dreams.dreamList.length; i++) {
         setDreams((prevDreams) => [
-          {
-            dreamContent: dreams.dreamList[i].content,
-            dreamAnalysis: dreams.dreamList[i].analysis,
-            dreamGenre: dreams.dreamList[i].genre,
-            dreamTitle: dreams.dreamList[i].title,
-            dreamImage: dreams.dreamList[i].image,
-            dreamUser: dreams.dreamList[i].user,
-          },
+        dreams.dreamList[i],
           ...prevDreams,
         ]);
       }
@@ -77,7 +70,7 @@ function App() {
         <Route path="/Community" element={<Community />}></Route>
         <Route
           path="/Dreams"
-          element={<Dreams colors={colors} dreams={dreams} />}
+          element={<Dreams colors={colors} dreams={dreams} setDreams={setDreams}/>}
         ></Route>
         <Route
           path="/AddDream"

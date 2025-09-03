@@ -8,7 +8,7 @@ aiRouter.post("/aiAnalysis", async (req, res, next) => {
   try {
     const { input } = req.body;
     const prompt =
-      "Generate a beautiful, fantastical image visualizing the dream: " + input;
+      "An artistic illustration of this dream: " + input;
     const imageGen = await openai.images.generate({
       prompt,
       n: 1,
@@ -43,45 +43,6 @@ aiRouter.post("/aiAnalysis", async (req, res, next) => {
         },
       },
     });
-
-    //unused
-    // const [aiAnalysis, imageGen] = await Promise.all([
-    //   openai.responses.create({
-    //     model: "gpt-4o-mini-2024-07-18",
-    //     input: [
-    //       {
-    //         role: "user",
-    //         content:
-    //           "You are a assistant helping to analyze the user's dreams. User will give you the dream desciprtion, you will help them analyze the dream. Lastly, identify whether the genre of the dream is Drama, Adventure, Horror, Fantasy, Science Fiction, Comedy, Realistic, or Abstract. Make sure to follow the capitalizations/spelling of the genre names exactly: " +
-    //           input,
-    //       },
-    //     ],
-    //     text: {
-    //       format: {
-    //         type: "json_schema",
-    //         name: "dream_analysis",
-    //         schema: {
-    //           type: "object",
-    //           properties: {
-    //             analysis: { type: "string" },
-    //             genre: { type: "string" },
-    //           },
-    //           required: ["analysis", "genre"],
-    //           additionalProperties: false,
-    //         },
-    //         strict: true,
-    //       },
-    //     },
-    //   }),
-    //   openai.images.generate({
-    //     model: "dall-e-2",
-    //     prompt: `Generate a beautiful, fantastical image visualizing the dream: "${input}"`,
-    //     size: "1024x1024",
-    //     quality: "standard",
-    //     response_format: "b64_json",
-    //     n: 1,
-    //   }),
-    // ]);
 
     const base64Image = imageGen.data[0].b64_json;
     const parsed = JSON.parse(aiAnalysis.output_text);

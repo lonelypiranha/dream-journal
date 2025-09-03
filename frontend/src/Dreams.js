@@ -1,41 +1,66 @@
-import HeaderAndNavBar from './HeaderAndNavBar';
-import FullAnalysis from "./FullAnalysis"
-import {useLocation} from 'react-router-dom';
-import {Link} from "react-router-dom";
-import './Dreams.css';
+import HeaderAndNavBar from "./HeaderAndNavBar";
+import Dropdown from "./Dropdown";
+import FullAnalysis from "./FullAnalysis";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Dreams.css";
 
 function Dreams(props) {
-    const dreamEntries = props.dreams.map((dr) => {
-    let color = { backgroundColor: props.colors[dr.dreamGenre] };
-
+  const dreamEntries = props.dreams.map((dr) => {
+    let color = { backgroundColor: props.colors[dr.genre] };
 
     let titleCol;
     let descCol;
-    if (dr.dreamGenre === "Adventure" || dr.dreamGenre === "Drama" || dr.dreamGenre === "Fantasy" || dr.dreamGenre === "Science Fiction" || dr.dreamGenre === "Horror") {
-        titleCol = "brightTitle";
-        descCol = "brightDesc";
+    let dateColor;
+    let bright;
+    if (
+      dr.genre === "Adventure" ||
+      dr.genre === "Drama" ||
+      dr.genre === "Fantasy" ||
+      dr.genre === "Science Fiction" ||
+      dr.genre === "Horror"
+    ) {
+      titleCol = "brightTitle";
+      descCol = "brightDesc";
+      dateColor = "brightDate";
+      bright = true;
+    } else {
+      titleCol = "darkTitle";
+      descCol = "darkDesc";
+      dateColor = "darkDate";
+      bright = false;
     }
-    else {
-        titleCol = "darkTitle";
-        descCol = "darkDesc";
-    }
 
-    
+    const createDate = dr.createdAt;
+    const newDate = new Date(createDate);
+    const formattedDate = newDate.toLocaleDateString("en-GB");
 
-
-    return <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/FullAnalysis" state={{content: dr.dreamContent, genre: dr.dreamGenre, analysis: dr.dreamAnalysis, title: dr.dreamTitle, image: dr.dreamImage}}>
-    <span style={color} className='entry'>
-        <p className={titleCol}>{dr.dreamTitle} </p>
-        <p className={descCol}>Genre: {dr.dreamGenre} </p>
-        <p className={descCol}>{dr.dreamContent} </p>
-    </span>
-    </Link> }
+    return (
+      <div style={{ position: "relative" }}>
+        <Link
+          style={{ textDecoration: "none", color: "inherit" }}
+          to="/FullAnalysis"
+          state={dr
+          }
+        >
+          <span style={color} className="entry">
+            <p className={dateColor}>{formattedDate}</p>
+            <p className={titleCol}>{dr.title}</p>
+            <p className={descCol}>Genre: {dr.genre} </p>
+            <p className={descCol}>{dr.content} </p>
+          </span>
+        </Link>
+        <Dropdown brightness={bright} dream={dr} dreams={props.dreams} setDreams={props.setDreams}/>
+      </div>
     );
+  });
   return (
-    <div className='contents'>
-    <HeaderAndNavBar />
-    {dreamEntries}
-    {props.dreams.length == 0 && <h2 id="noDreams">There are no dreams posted yet.</h2>}
+    <div className="contents">
+      <HeaderAndNavBar />
+      {dreamEntries}
+      {props.dreams.length == 0 && (
+        <h2 id="noDreams">There are no dreams posted yet.</h2>
+      )}
     </div>
   );
 }
