@@ -41,6 +41,11 @@ const dreamSchema = new mongoose.Schema(
       required: [true, "Post state required"],
       trim: false,
     },
+    postedDate: {
+      type: Date,
+      required: [true, "Posted/unposted date required"],
+      trim: false,
+    },
   },
   { timestamps: true }
 );

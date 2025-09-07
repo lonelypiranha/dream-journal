@@ -21,7 +21,6 @@ function FullAnalysis() {
         <p class='descA'>{location.state.content}</p>
         <p class='descB'>AI Analysis: </p>
         <p class='descA'>{location.state.analysis}</p>
-        
       </div>
     </>
   );

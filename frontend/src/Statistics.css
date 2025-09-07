@@ -1,0 +1,73 @@
+.currStreak {
+    width: 20%;
+    background-color: #a21939;
+    color: #FFF39A;
+    font-family: Inknut Antiqua;
+    padding-top: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    margin-top: 4%;
+    text-align: center;
+    justify-self: center;
+    border-radius: 15px;
+}
+
+.descInfo {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.statNumber {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.basicInfo {
+    width: 50%;
+    height: 300px;
+    color: #2D3173;
+    font-size: 20px;
+    font-family: Inknut Antiqua;
+    margin-top: 3%;
+    padding-top: 1%;
+    text-align: center;
+    justify-self: center;
+}
+
+.dreamCount {
+    background-color: #FFF39A;
+    border-top-left-radius: 15px;
+    display: inline-block;
+    height: 50%;
+    width: 49.9%;
+    margin-right: 0.1%;
+    align-items: center;
+    align-content: center;
+}
+
+.highestGenre {
+    background-color: #FFF39A;
+    border-top-right-radius: 15px;
+    border-left: #2D3173;
+    display: inline-block;
+    height: 50%;
+    width: 50%; 
+    align-items: center;
+    align-content: center;
+}
+
+.highestStreak {
+    background-color: #FFF39A;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: inline-block;
+    margin-top: 0.1%;
+    height: 49.9%;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+
+}

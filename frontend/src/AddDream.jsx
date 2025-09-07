@@ -94,6 +94,7 @@ function AddDream(props) {
         setSaved(1);
         setSaveButton("Dream Saved!");
         props.setDreams((prevDreams) => [dreamJSON.data[0], ...prevDreams]);
+        props.setUser(dreamJSON.updatedUser);
       } else {
         setSaveButton("Unable to save");
       }

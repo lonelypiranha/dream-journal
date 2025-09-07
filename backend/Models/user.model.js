@@ -19,7 +19,22 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: [true, 'Last active date required'],
         trim: false,
-    }
+    },
+    lastDreamed: {
+        type: Date,
+        required: false,
+        trim: false,
+    },
+    currentStreak: {
+        type: Number,
+        required: [true, 'Password required'],
+        trim: false,
+    },
+    highestStreak: {
+        type: Number,
+        required: [true, 'Password required'],
+        trim: false,
+    },
 }, { timestamps: true})
 
 const User = mongoose.model('User', userSchema);

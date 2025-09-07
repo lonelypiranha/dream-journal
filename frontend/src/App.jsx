@@ -75,9 +75,9 @@ function App() {
         ></Route>
         <Route
           path="/AddDream"
-          element={<AddDream setDreams={setDreams} user={user} />}
+          element={<AddDream setDreams={setDreams} setUser={setUser}/>}
         ></Route>
-        <Route path="/Statistics" element={<Statistics />}></Route>
+        <Route path="/Statistics" element={<Statistics setUser={setUser} user={user} dreams={dreams}/>}></Route>
         <Route path="Profile" element={<Profile user={user} setUser={setUser} setDreams={setDreams}/>}></Route>
         <Route path="/FullAnalysis" element={<FullAnalysis />}></Route>
         <Route path="/FullPost" element={<FullPost />}></Route>

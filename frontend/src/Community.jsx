@@ -57,8 +57,8 @@ function Community(props) {
           bright = false;
         }
     
-        const createDate = dr.createdAt;
-        const newDate = new Date(createDate);
+        const postedDate = dr.postedDate;
+        const newDate = new Date(postedDate);
         const formattedDate = newDate.toLocaleDateString("en-GB");
     
         return (

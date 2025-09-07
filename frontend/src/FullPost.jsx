@@ -5,8 +5,8 @@ import "./FullPost.css";
 function FullPost() {
   const location = useLocation();
 
-  const createDate = location.state.createdAt;
-  const newDate = new Date(createDate);
+  const postedDate = location.state.postedDate;
+  const newDate = new Date(postedDate);
   const formattedDate = newDate.toDateString();
 
   return (

@@ -20,7 +20,17 @@ export const signUp = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const newUsers = await User.create(
-      [{ name, email, password: hashedPassword, lastActive: new Date() }],
+      [
+        {
+          name,
+          email,
+          password: hashedPassword,
+          lastActive: new Date(),
+          lastDreamed: null,
+          currentStreak: 0,
+          highestStreak: 0,
+        },
+      ],
       { session }
     );
 
@@ -69,7 +79,10 @@ export const signIn = async (req, res, next) => {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
-    await User.updateOne({ email: email }, { $set: { lastActive: new Date() } });
+    await User.updateOne(
+      { email: email },
+      { $set: { lastActive: new Date() } }
+    );
     res.status(200).json({
       success: true,
       message: "User signed in successfully",

@@ -9,6 +9,7 @@ import aiRouter from "./Routes/openai_response.js";
 import authRouter from "./Routes/auth.routes.js";
 import userRouter from "./Routes/user.routes.js";
 import errorMiddleware from "./error_handler/error.middleware.js";
+import statsRouter from "./Routes/statistics.routes.js";
 import cookieParser from 'cookie-parser';
 import mongoose from "mongoose";
 
@@ -22,46 +23,9 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/dbOperations', dreamRouter);
 app.use('/api/v1/aiResponse', aiRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/stats', statsRouter);
 app.use(errorMiddleware);
 
-// const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-// app.post("/api/ai", async (req, res) => {
-//   try {
-//     const { input } = req.body;
-//     const response = await openai.responses.create({
-//       model: "gpt-4o-mini-2024-07-18",
-//       input: [
-//         {
-//           role: "user",
-//           content:
-//             "You are a assistant helping to analyze the user's dreams. User will give you the dream desciprtion, you will help them analyze the dream. Lastly, identify whether the genre of the dream is Drama, Adventure, Horror, Fantasy, Science Fiction, Comedy, Realistic, or Abstract. Make sure to follow the capitalizations/spelling of the genre names exactly: " +
-//             input,
-//         },
-//       ],
-//       text: {
-//         format: {
-//           type: "json_schema",
-//           name: "dream_analysis",
-//           schema: {
-//             type: "object",
-//             properties: {
-//               analysis: { type: "string" },
-//               genre: { type: "string" },
-//             },
-//             required: ["analysis", "genre"],
-//             additionalProperties: false,
-//           },
-//           strict: true,
-//         },
-//       },
-//     });
-//     const parsed = JSON.parse(response.output_text);
-//     res.json({ result1: parsed.analysis, result2: parsed.genre });
-//   } catch (error) {
-//     res.status(500).send(error.message);
-//   }
-// });
 
 app.listen(3001, async () => {
   console.log("Server running on port 3001");
