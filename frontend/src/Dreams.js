@@ -33,7 +33,11 @@ function Dreams(props) {
 
     const createDate = dr.createdAt;
     const newDate = new Date(createDate);
-    const formattedDate = newDate.toLocaleDateString("en-GB");
+    const formattedDate = newDate.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
 
     return (
       <div style={{ position: "relative" }}>

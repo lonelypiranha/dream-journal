@@ -7,7 +7,12 @@ function FullAnalysis() {
 
   const createDate = location.state.createdAt;
   const newDate = new Date(createDate);
-  const formattedDate = newDate.toDateString();
+  const formattedDate = newDate.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",  
+    day: "2-digit",  
+    year: "numeric",  
+  });
 
   return (
     <>

@@ -7,7 +7,12 @@ function FullPost() {
 
   const postedDate = location.state.postedDate;
   const newDate = new Date(postedDate);
-  const formattedDate = newDate.toDateString();
+  const formattedDate = newDate.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",  
+    day: "2-digit",  
+    year: "numeric",  
+  });
 
   return (
     <>
