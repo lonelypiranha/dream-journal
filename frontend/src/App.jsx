@@ -11,6 +11,8 @@ import FullPost from "./FullPost";
 import { useState } from "react";
 import { useEffect } from "react";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function App() {
   const [dreams, setDreams] = useState([]);
   const [user, setUser] = useState({});
@@ -29,7 +31,7 @@ function App() {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    const newUser = await fetch("/api/v1/users/me", {
+    const newUser = await fetch(`${API_BASE_URL}/api/v1/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -39,7 +41,7 @@ function App() {
       setUser(newUserJSON.data);
     }
 
-    const result = await fetch("/api/v1/dbOperations/dbFetchDream", {
+    const result = await fetch(`${API_BASE_URL}/api/v1/dbOperations/dbFetchDream`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (result.ok) {

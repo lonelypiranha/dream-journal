@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import SignUp from "./signUp";
 import "./auth.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function SignIn(props) {
   const [valid, setValid] = useState(true);
   const [error, setError] = useState("");
@@ -30,7 +32,7 @@ function SignIn(props) {
     document.getElementById("see").checked = false;
 
     try {
-      const result = await fetch("/api/v1/auth/sign-in", {
+      const result = await fetch(`${API_BASE_URL}/api/v1/auth/sign-in`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +58,7 @@ function SignIn(props) {
         props.setUser(resultParsed.data.user);
         localStorage.setItem("token", resultParsed.data.token);
 
-        const result2 = await fetch(`/api/v1/dbOperations/dbFetchDream`, {
+        const result2 = await fetch(`${API_BASE_URL}/api/v1/dbOperations/dbFetchDream`, {
           headers: { Authorization: `Bearer ${resultParsed.data.token}` },
         });
         if (result2.ok) {

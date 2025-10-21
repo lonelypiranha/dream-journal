@@ -19,6 +19,8 @@ import "./react-calendar-heatmap.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { format } from "date-fns";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function Statistics(props) {
   const [highGenre, setHighGenre] = useState("none");
   const [selectedYear, setSelectedYear] = useState(0);
@@ -166,7 +168,7 @@ function Statistics(props) {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    const stats = await fetch("/api/v1/stats/generateStats", {
+    const stats = await fetch(`${API_BASE_URL}/api/v1/stats/generateStats`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     });

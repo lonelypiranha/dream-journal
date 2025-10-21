@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import {Link} from "react-router-dom";
 import "./Community.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function Community(props) {
     const [posts, setPosts] = useState([]);
 
@@ -11,7 +13,7 @@ function Community(props) {
         const token = localStorage.getItem("token");
         if (!token) return;
     
-        const result = await fetch("/api/v1/dbOperations/dbFetchPost", {
+        const result = await fetch(`${API_BASE_URL}/api/v1/dbOperations/dbFetchPost`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (result.ok) {

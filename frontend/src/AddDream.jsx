@@ -9,6 +9,8 @@ import { useRef } from "react";
 import "./AddDream.css";
 import test from "./static/tesimg.png";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function AddDream(props) {
   let navigate = useNavigate();
   const [submitStatus, setSubmitStatus] = useState("Analyze Dream");
@@ -34,7 +36,7 @@ function AddDream(props) {
   }, [dream.dreamAnalysis]);
 
   const responseGenerate = async (prompt, title) => {
-    const result = await fetch("/api/v1/aiResponse/aiAnalysis", {
+    const result = await fetch(`${API_BASE_URL}/api/v1/aiResponse/aiAnalysis`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +76,7 @@ function AddDream(props) {
         setSaveButton("Unable to save");
         return;
       }
-      const result = await fetch("/api/v1/dbOperations/dbAddDream", {
+      const result = await fetch(`${API_BASE_URL}/api/v1/dbOperations/dbAddDream`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

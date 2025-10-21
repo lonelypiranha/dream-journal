@@ -7,6 +7,8 @@ import unpost from "./static/send-2.png";
 import "./Dropdown.css";
 import "./Popup.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 export default function Dropdown(props) {
   const [open, setOpen] = useState(false); // dropdown
   const [isOpen, setIsOpen] = useState(false); // pop-up
@@ -54,7 +56,7 @@ export default function Dropdown(props) {
     if (!token) {
       return;
     }
-    const result = await fetch("/api/v1/dbOperations/dbDeleteDream", {
+    const result = await fetch(`${API_BASE_URL}/api/v1/dbOperations/dbDeleteDream`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +83,7 @@ export default function Dropdown(props) {
     if (!token) {
       return;
     }
-    const result = await fetch("/api/v1/dbOperations/dbChangePostStatus", {
+    const result = await fetch(`${API_BASE_URL}/api/v1/dbOperations/dbChangePostStatus`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
