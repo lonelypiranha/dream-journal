@@ -18,6 +18,7 @@ import {
 import "./react-calendar-heatmap.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { format } from "date-fns";
+import HeatMap from "@uiw/react-heat-map";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -51,7 +52,7 @@ function Statistics(props) {
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, "0");
     const dd = String(date.getDate()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd}`;
+    return `${yyyy}/${mm}/${dd}`;
   }
 
   function fillAndCumulative(data, genres) {
@@ -84,10 +85,15 @@ function Statistics(props) {
       Object.fromEntries(genres.map((g) => [g, 0]))
     );
     if (endYear == curr) {
-        map.set(format(new Date(), "yyyy-MM-dd"), Object.fromEntries(genres.map((g) => [g, 0])));
-    }
-    else {
-    map.set(`${endYear}-12-31`, Object.fromEntries(genres.map((g) => [g, 0])));
+      map.set(
+        format(new Date(), "yyyy-MM-dd"),
+        Object.fromEntries(genres.map((g) => [g, 0]))
+      );
+    } else {
+      map.set(
+        `${endYear}-12-31`,
+        Object.fromEntries(genres.map((g) => [g, 0]))
+      );
     }
 
     for (const dream of dreams) {
@@ -286,15 +292,13 @@ function Statistics(props) {
     }
   };
 
-  const getTooltipDataAttrs = (value) => {
-    // Temporary hack around null value.date issue
-    if (!value || !value.date) {
-      return null;
-    }
-    // Configuration for react-tooltip
-    return {
-      "data-tip": `${value.date} has count: ${value.count}`,
-    };
+  const getColor = (count) => {
+    if (!count) return "#f0f0f0";
+    if (count === 1) return "#fff8c5";
+    if (count === 2) return "#ffe066";
+    if (count === 3) return "#ffc107";
+    if (count === 4) return "#ff8c00";
+    return "#d9534f";
   };
 
   const determineColor = (genre) => {
@@ -351,28 +355,46 @@ function Statistics(props) {
             </option>
           ))}
         </select>
-        <CalendarHeatmap
-          startDate={new Date(`${selectedYear - 1}-12-31`)}
-          endDate={new Date(`${selectedYear}-12-31`)}
-          showWeekdayLabels={true}
-          showOutOfRangeDays={false}
-          values={valuesSelected}
-          weekdayLabels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
-          tooltipDataAttrs={(value) => {
-            getTooltipDataAttrs(value);
-          }}
-          classForValue={(value) => {
-            if (!value) {
-              return "color-empty";
-            } else {
-              if (value.count >= 4) {
-                return `color-scale-4`;
-              }
-              return `color-scale-${value.count}`;
-            }
-          }}
-        />
-        <ReactTooltip />
+        <div style={{ margin: "20px auto auto auto" }}>
+          <HeatMap
+            style={{ color: "#FFF39A", fontSize: "15px" }}
+            value={valuesSelected}
+            startDate={new Date(`${selectedYear}/01/01`)}
+            endDate={new Date(`${selectedYear}/12/31`)}
+            width={1250}
+            height={250}
+            rectSize={20}
+            space={3}
+            monthLabels={[
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
+            ]}
+            weekLabels={["", "Mon", "", "Wed", "", "Fri", ""]}
+            panelColors={{
+              0: "#f0f0f0",
+              1: "#fff8c5",
+              2: "#ffe066",
+              3: "#ffc107",
+              4: "#ff8c00",
+              5: "#d9534f",
+            }}
+            rectRender={(props, data) => (
+              <rect {...props} rx="2" ry="2" fill={getColor(data.count)}>
+                <title>{`${data.date}: ${data.count || 0} dreams`}</title>
+              </rect>
+            )}
+          />
+        </div>
       </div>
 
       <h2 className="stat-headers">Genre Distribution</h2>

@@ -7,7 +7,7 @@
     padding-left: 1%;
     padding-right: 1%;
     padding-bottom: 1%;
-    margin-top: 4%;
+    margin: 4% auto auto auto;
     text-align: center;
     justify-self: center;
     border-radius: 15px;
@@ -31,7 +31,7 @@
     color: #2D3173;
     font-size: 20px;
     font-family: Inknut Antiqua;
-    margin-top: 3%;
+    margin: 3% auto auto auto;
     padding-top: 1%;
     text-align: center;
     justify-self: center;
@@ -73,10 +73,11 @@
 }
 
 .heatMap {
-    margin-top: 50px;
+    margin: 50px auto auto auto;
     width: 1300px;
     text-align: center;
     justify-self: center;
+    justify-items: center;
 }
 
 .stat-headers {
@@ -123,4 +124,9 @@
     font-weight: bolder;
     color: #2D3173;
     border: none;
+}
+
+.heatmap-style{
+    color: #fff39a;
+    margin: auto;
 }

@@ -28,7 +28,7 @@
     padding-left: 1%;
     padding-right: 1%;
     padding-bottom: 1%;
-    margin-top: 1.5%;
+    margin: 1.5% auto auto auto;
     font-size: 20px;
     border-radius: 15px;
     text-align: left;
@@ -51,6 +51,7 @@
 
 .descB {
     margin-top: 0;
+    text-align: center;
 }
 
 .descC {
